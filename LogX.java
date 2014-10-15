@@ -1,4 +1,4 @@
-package com.bearbest.vote;
+package com.baidu.spoon.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -40,6 +40,7 @@ public class LogX {
 
     private static String sClassName = null;
     private static String sMethodName = null;
+    private static String sTag = null;
 
     private static void getTrace() {
         StackTraceElement caller = new Throwable().fillInStackTrace()
@@ -51,6 +52,8 @@ public class LogX {
         sMethodName = new StringBuilder().append(
                 caller.getMethodName() + "->" + caller.getLineNumber() + ": ")
                 .toString();
+
+        sTag = "bearbest@pal:~$ " + sClassName;
     }
 
     public static void v(String text) {
@@ -60,9 +63,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.v(sClassName, message);
+        Log.v(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.VERBOSE, sClassName, message);
+            logOnFile(Log.VERBOSE, sTag, message);
     }
 
     public static void v(String text, Object... args) {
@@ -78,9 +81,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.v(sClassName, message);
+        Log.v(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.VERBOSE, sClassName, message);
+            logOnFile(Log.VERBOSE, sTag, message);
     }
 
     public static void vt(String tag, String text) {
@@ -107,13 +110,12 @@ public class LogX {
 
         getTrace();
         String message = sMethodName + text;
-        String tag = "bearbest@pal:~$ " + sClassName;
 
-        Log.d(tag, message);
+        Log.d(sTag, message);
 
         if (LOG_ON_FILE) {
             // LogS.d(text); // 把log写入文件
-            logOnFile(Log.DEBUG, tag, message);
+            logOnFile(Log.DEBUG, sTag, message);
         }
 
     }
@@ -150,9 +152,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.d(sClassName, message);
+        Log.d(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.DEBUG, sClassName, message);
+            logOnFile(Log.DEBUG, sTag, message);
     }
 
     /**
@@ -170,9 +172,9 @@ public class LogX {
         getTrace();
 
         String message = sClassName + "->" + sMethodName + text;
-        Log.d(tag, message);
+        Log.d(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.DEBUG, tag, message);
+            logOnFile(Log.DEBUG, sTag, message);
     }
 
     public static void i(String text) {
@@ -182,9 +184,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.i(sClassName, message);
+        Log.i(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.INFO, sClassName, message);
+            logOnFile(Log.INFO, sTag, message);
     }
 
     public static void i(String text, Object... args) {
@@ -200,9 +202,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.i(sClassName, message);
+        Log.i(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.INFO, sClassName, message);
+            logOnFile(Log.INFO, sTag, message);
     }
 
     public static void w(String text) {
@@ -212,9 +214,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.w(sClassName, message);
+        Log.w(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.WARN, sClassName, message);
+            logOnFile(Log.WARN, sTag, message);
     }
 
     public static void w(String text, Object... args) {
@@ -230,9 +232,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.w(sClassName, message);
+        Log.w(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.WARN, sClassName, message);
+            logOnFile(Log.WARN, sTag, message);
     }
 
     public static void e(String text) {
@@ -242,9 +244,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.e(sClassName, message);
+        Log.e(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.ERROR, sClassName, message);
+            logOnFile(Log.ERROR, sTag, message);
     }
 
     public static void e(String text, Object... args) {
@@ -260,9 +262,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.e(sClassName, message);
+        Log.e(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.ERROR, sClassName, message);
+            logOnFile(Log.ERROR, sTag, message);
 
     }
 
@@ -276,9 +278,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + e.toString();
-        Log.e(sClassName, message);
+        Log.e(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.ERROR, sClassName, message);
+            logOnFile(Log.ERROR, sTag, message);
     }
 
     public static void e(Throwable e, String text) {
@@ -291,9 +293,9 @@ public class LogX {
         getTrace();
 
         String message = sMethodName + text;
-        Log.e(sClassName, message);
+        Log.e(sTag, message);
         if (LOG_ON_FILE)
-            logOnFile(Log.ERROR, sClassName, sClassName);
+            logOnFile(Log.ERROR, sTag, message);
     }
 
     private static void logOnFile(int level, String tag, String text) {
